@@ -1,0 +1,476 @@
+/* Елегантен, премиум вид на EUR като скоби до BGN, без доп. блокове */
+.wdp-eur-inline,
+.wdp-eur-inline-email {
+  font-weight: 600;
+  margin-left: .15em;
+  white-space: nowrap;
+  font-size: .95em;
+}
+
+/* В ред с намаление – старата цена по-бледа */
+del .wdp-eur-inline {
+  opacity: .75;
+  font-weight: 500;
+}
+
+/* Мини-карта: редът quantity × price – EUR да пада на нов ред само при много тясно */
+.kadence-mini-cart-refresh .mini-cart-container .woocommerce-mini-cart .quantity .wdp-eur-inline {
+  display: inline;
+  /* оставяме inline за на същия ред */
+}
+
+/* Totals клетки – EUR да не чупи редове */
+.wc-block-components-totals-item__value .wdp-eur-inline,
+.woocommerce table.shop_table td .wdp-eur-inline {
+  white-space: nowrap;
+}
+
+/* Продукт/архив: два реда при намаление остават (del + ins), но EUR е inline вътре в тях */
+.woocommerce div.product p.price del,
+.woocommerce div.product p.price ins {
+  display: block;
+}
+
+/* Скриване на дясната колона (тотал на реда) в Cart Blocks */
+.wc-block-cart-items__header-total,
+.wc-block-cart-item__total,
+.wc-block-cart-item__total-price-and-sale-badge-wrapper {
+  display: none !important;
+}
+/* Stack prices in Cart Blocks: old price on top, new price below */
+.wc-block-cart-item__prices .wdp-line-old,
+.wc-block-cart-item__prices .wdp-line-new,
+.wc-block-cart-item__prices .wdp-line-single {
+  display: block;
+  line-height: 1.25;
+}
+
+.wc-block-cart-item__prices .wdp-line-old {
+  margin: 0 0 2px;
+  opacity: 0.75;
+}
+
+.wc-block-cart-item__prices .wdp-line-new {
+  margin: 0;
+  font-weight: 600;
+}
+
+.wc-block-cart-item__prices .wdp-line-single {
+  margin: 0;
+  font-weight: 600;
+}
+
+
+/* Цвят на НОВАТА цена (sale) – смени стойността по желание */
+:root {
+  --wdp-new-price-color: #c2410c;
+}
+
+/* прим.: тъмно оранжево */
+
+/* Product/Archive (класически Woo шаблони) */
+.woocommerce div.product p.price ins,
+.woocommerce ul.products li.product .price ins,
+.wdp-price-sale {
+  color: var(--wdp-new-price-color) !important;
+}
+
+/* Woo Blocks (Cart/Checkout) – лявата ценова група под името */
+.wc-block-cart-item__prices ins.is-discounted,
+.wc-block-cart-item__prices .wdp-line-new {
+  color: var(--wdp-new-price-color) !important;
+}
+
+/* Направи EUR в скобите да наследи цвета на новата цена */
+.woocommerce .price ins .wdp-eur-inline,
+.wdp-price-sale .wdp-eur-inline,
+.wc-block-cart-item__prices ins.is-discounted .wdp-eur-inline,
+.wc-block-cart-item__prices .wdp-line-new .wdp-eur-inline {
+  color: currentColor !important;
+}
+/* Hide "savings" sale badge in WooCart/Checkout Blocks */
+.wc-block-cart .wc-block-components-product-badge.wc-block-components-sale-badge,
+.wc-block-checkout .wc-block-components-product-badge.wc-block-components-sale-badge,
+.wc-block-cart .wc-block-components-product-sale-badge,
+.wc-block-checkout .wc-block-components-product-sale-badge {
+  display: none !important;
+}
+/* Checkout order summary – подредба стара / нова / единична цена */
+.wc-block-checkout .wc-block-components-order-summary-item .wc-block-components-product-price .wdp-line-old,
+.wc-block-checkout .wc-block-components-order-summary-item .wc-block-components-product-price .wdp-line-new,
+.wc-block-checkout .wc-block-components-order-summary-item .wc-block-components-product-price .wdp-line-single {
+  display: block;
+  line-height: 1.2;
+}
+
+.wc-block-checkout .wc-block-components-order-summary-item .wc-block-components-product-price .wdp-line-old {
+  margin: 0 0 2px;
+  opacity: .75;
+  font-weight: 500;
+}
+
+.wc-block-checkout .wc-block-components-order-summary-item .wc-block-components-product-price .wdp-line-new {
+  margin: 0;
+  font-weight: 600;
+  color: var(--wdp-new-price-color) !important;
+}
+
+.wc-block-checkout .wc-block-components-order-summary-item .wc-block-components-product-price .wdp-line-single {
+  margin: 0;
+  font-weight: 600;
+  color: var(--wdp-new-price-color) !important;
+}
+
+/* EUR да наследи цвета на новата/единствена цена */
+.wc-block-checkout .wc-block-components-order-summary-item .wc-block-components-product-price .wdp-line-new .wdp-eur-inline,
+.wc-block-checkout .wc-block-components-order-summary-item .wc-block-components-product-price .wdp-line-single .wdp-eur-inline {
+  color: currentColor !important;
+}
+.wc-block-checkout .wc-block-components-order-summary__row {
+  grid-template-columns: auto !important;
+}
+
+@media (max-width:500px) {
+  /* Remove bottom margin set on cart items table and its cells */
+    .wc-block-cart table.wc-block-cart-items,
+    .wc-block-cart table.wc-block-cart-items td,
+    .wc-block-cart table.wc-block-cart-items th {
+      margin: 0 !important;
+    }
+  
+    /* По желание – таргетирай само двете клетки (Image и Product) */
+    .wc-block-cart td.wc-block-cart-item__image,
+    .wc-block-cart td.wc-block-cart-item__product {
+      margin: 0 !important;
+    }
+}
+/* Hide the "Guest" badge in Checkout (Blocks) */
+.wc-block-checkout .wc-block-components-checkout-step__title-badge {
+  display: none !important;
+}
+/* Hide price total column in Checkout order summary */
+.wc-block-checkout .wc-block-components-order-summary-item__total,
+.wc-block-checkout .wc-block-components-order-summary__row .wc-block-components-order-summary-item__total,
+.wc-block-checkout .wc-block-components-order-summary-item__total-price-and-sale-badge-wrapper {
+  display: none !important;
+}
+/* Checkout: скрий и премахни ширината на дясната колонка с цената */
+.wc-block-checkout .wc-block-components-order-summary-item__total,
+.wc-block-checkout .wc-block-components-order-summary-item__total-price,
+.wc-block-checkout .wc-block-components-order-summary-item__total-price-and-sale-badge-wrapper,
+.wc-block-checkout .wc-block-components-order-summary-item__total-price-wrapper {
+  display: none !important;
+  width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Пренареждаме grid-а на всеки ред да има само една колона (лявата) */
+.wc-block-checkout .wc-block-components-order-summary-item,
+.wc-block-checkout .wc-block-components-order-summary__row {
+  display: grid;
+  grid-template-columns: 1fr !important;
+  column-gap: 0 !important;
+}
+
+/* Премахни всякакъв leftover flex (ако темата override-ва към flex) */
+.wc-block-checkout .wc-block-components-order-summary-item[style*="flex"],
+.wc-block-checkout .wc-block-components-order-summary__row[style*="flex"] {
+  display: block !important;
+}
+
+/* Уверяваме се, че описанието (лявата част) заема пълната ширина */
+.wc-block-checkout .wc-block-components-order-summary-item__description {
+  width: 100% !important;
+}
+@media (max-width:500px) {
+  .wc-block-components-totals-item.wc-block-components-totals-footer-item{
+    font-size: 14px !important; 
+  }
+}
+/* Premium стил за бутона "Поръчай" (Place Order) – запазва цвета */
+.wc-block-checkout .wc-block-components-checkout-place-order-button,
+.wc-block-checkout button.wc-block-components-checkout-place-order-button.wc-block-components-button {
+  --wdp-btn-bg: var(--your-button-color, #8d3f1c);
+  /* остави или смени с реалния ти цвят */
+  --wdp-btn-bg-hover: color-mix(in srgb, var(--wdp-btn-bg) 88%, #ffffff);
+  --wdp-btn-bg-active: color-mix(in srgb, var(--wdp-btn-bg) 75%, #000000);
+  --wdp-btn-text: #fff;
+  background: linear-gradient(135deg, var(--wdp-btn-bg) 0%, color-mix(in srgb, var(--wdp-btn-bg) 92%, #ffffff) 100%) !important;
+  color: var(--wdp-btn-text) !important;
+  font-weight: 600 !important;
+  font-size: clamp(15px, 4vw, 16px) !important;
+  line-height: 1.15 !important;
+  letter-spacing: .4px;
+  padding: 0.95em 1.6em !important;
+  border-radius: 14px !important;
+  border: 1px solid color-mix(in srgb, var(--wdp-btn-bg) 65%, #000000) !important;
+  box-shadow:
+    0 4px 12px -2px rgba(0, 0, 0, .25),
+    inset 0 0 0 1px rgba(255, 255, 255, .18);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  /* за да изглежда по‑уверено, махни ако искаш авто */
+  cursor: pointer;
+  transition:
+    background .25s ease,
+    box-shadow .25s ease,
+    transform .15s ease;
+  position: relative;
+  isolation: isolate;
+  text-decoration: none !important;
+}
+
+/* Hover – леко изсветляване, повече „дълбочина“ */
+.wc-block-checkout .wc-block-components-checkout-place-order-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--wdp-btn-bg-hover) 0%, var(--wdp-btn-bg) 85%) !important;
+  box-shadow:
+    0 6px 16px -3px rgba(0, 0, 0, .30),
+    0 2px 4px -2px rgba(0, 0, 0, .35),
+    inset 0 0 0 1px rgba(255, 255, 255, .22);
+  transform: translateY(-2px);
+}
+
+/* Active (натиснато) */
+.wc-block-checkout .wc-block-components-checkout-place-order-button:active:not(:disabled) {
+  background: var(--wdp-btn-bg-active) !important;
+  box-shadow:
+    0 3px 8px -2px rgba(0, 0, 0, .35),
+    inset 0 2px 4px rgba(0, 0, 0, .35);
+  transform: translateY(0);
+}
+
+/* Фокус – мек акцентен halo + контрастна вътрешна рамка */
+.wc-block-checkout .wc-block-components-checkout-place-order-button:focus-visible {
+  outline: 0 !important;
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, .9),
+    0 0 0 6px color-mix(in srgb, var(--wdp-btn-bg) 60%, #ffffff),
+    0 6px 16px -3px rgba(0, 0, 0, .3),
+    inset 0 0 0 1px rgba(255, 255, 255, .25);
+}
+
+/* Disabled – приглушен вид, курсор по подразбиране */
+.wc-block-checkout .wc-block-components-checkout-place-order-button:disabled {
+  opacity: .55 !important;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow:
+    0 2px 6px -2px rgba(0, 0, 0, .2),
+    inset 0 0 0 1px rgba(255, 255, 255, .15);
+}
+
+/* Малки екрани – малко по-компактен */
+@media (max-width:480px) {
+  .wc-block-checkout .wc-block-components-checkout-place-order-button {
+    font-size: 15px !important;
+    padding: 0.85em 1.25em !important;
+    border-radius: 12px !important;
+  }
+}
+.wc-block-checkout .wc-block-components-checkout-place-order-button:hover::after {
+  opacity: 1;
+}
+/* === Desktop: бутонът Поръчай отгоре, линкът Обратно към количката отдолу === */
+@media (min-width: 781px) {
+
+  /* Подреди action реда като колона */
+  .wc-block-checkout .wc-block-checkout__actions_row {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    row-gap: 0 !important;
+  }
+
+  /* Бутонът остава първи */
+  .wc-block-checkout .wc-block-components-checkout-place-order-button {
+    order: 1 !important;
+    margin: 0 !important;
+  }
+
+  /* Линкът отива отдолу */
+  .wc-block-checkout .wc-block-components-checkout-back-to-cart-button,
+  .wc-block-checkout .wc-block-checkout__actions_row a.wc-block-components-checkout-back-to-cart-button {
+    order: 2 !important;
+    margin: 16px 0 0 !important;
+    align-self: flex-start !important;
+    display: inline-flex !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    font-size: 15px;
+    font-weight: 500;
+    background: none !important;
+    border: 0 !important;
+    padding: 2px 0 !important;
+    color: #555 !important;
+    text-decoration: none !important;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .wc-block-checkout .wc-block-components-checkout-back-to-cart-button:hover {
+    color: var(--wdp-btn-bg, #8d3f1c) !important;
+    text-decoration: underline;
+  }
+
+  .wc-block-checkout .wc-block-components-checkout-back-to-cart-button:focus-visible {
+    outline: 0;
+    color: var(--wdp-btn-bg, #8d3f1c) !important;
+    background: rgba(0, 0, 0, .06);
+    border-radius: 6px;
+    padding: 4px 8px !important;
+  }
+}
+
+/* === Desktop: центриран бутон отгоре, линк отдолу === */
+@media (min-width:446px) {
+  .wc-block-checkout .wc-block-checkout__actions_row {
+      display: flex !important;
+      flex-direction: column-reverse !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      gap: 14px !important;
+    }
+  
+    /* Бутонът остава първи */
+    .wc-block-checkout .wc-block-components-checkout-place-order-button {
+      order: 1 !important;
+      margin: 0 !important;
+    }
+  
+    /* Линкът "Обратно към количката" отива отдолу, центриран */
+    .wc-block-checkout .wc-block-components-checkout-back-to-cart-button,
+    .wc-block-checkout .wc-block-checkout__actions_row a.wc-block-components-checkout-back-to-cart-button {
+      order: 2 !important;
+      align-self: center !important;
+      margin: 0 !important;
+      padding: 2px 0 !important;
+      display: inline-flex !important;
+      justify-content: center !important;
+      text-align: center !important;
+      width: auto !important;
+    }
+
+  .wc-block-checkout .wc-block-components-checkout-back-to-cart-button:hover {
+    color: var(--wdp-btn-bg, #8d3f1c) !important;
+    text-decoration: underline;
+  }
+
+  .wc-block-checkout .wc-block-components-checkout-back-to-cart-button:focus-visible {
+    outline: 0;
+    color: var(--wdp-btn-bg, #8d3f1c) !important;
+    background: rgba(0, 0, 0, .06);
+    border-radius: 6px;
+    padding: 4px 8px !important;
+  }
+
+  /* Ако някоя версия форсира grid или justify-content друго чрез style атрибут */
+  .wc-block-checkout .wc-block-checkout__actions_row[style*="grid"],
+  .wc-block-checkout .wc-block-checkout__actions_row[style*="row"],
+  .wc-block-checkout .wc-block-checkout__actions_row[style*="justify"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+  }
+}
+.entry-content {
+  word-break: keep-all !important;
+}
+/* EUR при тотала и бутона (нормален текст) */
+.wdp-eur-inline-total,
+.wc-block-checkout .wc-block-components-checkout-place-order-button .wdp-btn-eur-inline {
+  font-weight: 600;
+  font-size: .9em;
+  white-space: nowrap;
+  margin-left: .3em;
+  opacity: .9;
+}
+
+@media (max-width:480px) {
+
+  .wdp-eur-inline-total,
+  .wc-block-checkout .wc-block-components-checkout-place-order-button .wdp-btn-eur-inline {
+    font-size: .85em;
+    margin-left: .25em;
+  }
+}
+/* Преместване на декоративния ефект от ::after към ::before */
+.wc-block-checkout .wc-block-components-checkout-place-order-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .25), transparent 65%);
+  opacity: .35;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* EUR след текста на бутона – взема стойността от data-wdp-eur */
+.wc-block-checkout .wc-block-components-checkout-place-order-button[data-wdp-eur]::after {
+  content: ' ' attr(data-wdp-eur);
+  position: static;
+  /* текст, не декор */
+  font-weight: 600;
+  font-size: .9em;
+  white-space: nowrap;
+  margin-left: .3em;
+  opacity: .9;
+}
+
+@media (max-width:480px) {
+  .wc-block-checkout .wc-block-components-checkout-place-order-button[data-wdp-eur]::after {
+    font-size: .85em;
+    margin-left: .25em;
+  }
+}
+/* Етикети Totals – без пренасяне на двоеточие */
+.wc-block-components-totals-item__label {
+  white-space: nowrap;
+}
+
+/* Стойност за безплатна доставка (ако искаш да я подсилиш още) */
+.wc-block-components-totals-item--shipping .wc-block-components-totals-item__value strong {
+  letter-spacing: .5px;
+}
+
+.wc-block-checkout .wc-block-components-checkout-place-order-button,
+.wc-block-checkout button.wc-block-components-checkout-place-order-button.wc-block-components-button {
+  border: 1px solid color-mix(in srgb, var(--wdp-btn-bg) 40%, #000000) !important;
+  /* по-мек контур */
+  box-shadow:
+    0 3px 10px -3px rgba(0, 0, 0, .25),
+    inset 0 0 0 1px rgba(255, 255, 255, .18);
+}
+.wc-block-checkout .wc-block-components-checkout-place-order-button {
+  font-weight: 600 !important;
+  /* ако искаш малко по-леко: 500 */
+  letter-spacing: .25px;
+  /* малко по-малък spacing за по-елегантен текст */
+}
+.wc-block-checkout .wc-block-components-checkout-place-order-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow:
+    0 5px 14px -4px rgba(0, 0, 0, .30),
+    inset 0 0 0 1px rgba(255, 255, 255, .22);
+}
+/* Мобилно: скрий горното "Обобщение на поръчката" с dropdown-а */
+@media (max-width: 768px) {
+  .wc-block-checkout .wc-block-components-checkout-order-summary__title {
+    display: none !important;
+  }
+}
+/* EUR в таблицата "Данни на поръчката" – същия стил като сумата */
+.woocommerce-table--order-details td .wdp-eur-inline,
+.woocommerce-table--order-details tfoot td .wdp-eur-inline,
+.woocommerce table.shop_table td .wdp-eur-inline {
+  font: inherit;
+  font-size: 1em;
+  font-weight: inherit;
+  color: inherit;
+  white-space: nowrap;
+  margin-left: .3em;
+}

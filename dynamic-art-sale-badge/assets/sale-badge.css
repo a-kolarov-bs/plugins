@@ -1,0 +1,102 @@
+/* === Sale Badge Overlay (не заема място, стои над всичко) ===
+   - Фон:   var(--global-palette-highlight)
+   - Текст: var(--global-palette-highlight-alt2)
+*/
+
+/* 0) Anchor за absolute позициониране (НЕ absolute) */
+.woocommerce ul.products li.product,
+.woocommerce div.product div.images,
+.woocommerce div.product .woocommerce-product-gallery,
+.wc-block-grid__product,
+.wc-block-components-product-image,
+.wp-block-woocommerce-product-template {
+  position: relative !important;
+  /* корекция от absolute -> relative */
+  z-index: 1;
+  /* стабилен контекст под баджа */
+}
+
+/* 1) Единен badge стил (Classic Woo + Blocks) – overlay */
+.my-sale-badge,
+.woocommerce span.onsale,
+.wc-block-components-product-sale-badge {
+  position: absolute !important;
+  /* overlay, не заема място */
+  top: 10px !important;
+  left: 10px !important;
+  right: auto !important;
+
+  display: inline-block !important;
+  margin: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  padding: 4px 10px !important;
+
+  font-size: 12px !important;
+  line-height: 18px !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  letter-spacing: .2px !important;
+  border-radius: 999px !important;
+
+  
+  color: var(--global-palette-highlight-alt2, #ffffff) !important;
+  border: 1px solid rgba(0, 0, 0, .08) !important;
+box-shadow: 1px 1px 7px 1px var(--global-palette6);
+
+  
+  z-index: 2 !important;
+  /* над изображение/лупа/тъмбове */
+  pointer-events: none !important;
+  /* да не пречи на кликове върху снимката */
+  transform: none !important;
+}
+.woocommerce span.onsale,
+.wc-block-components-product-sale-badge,
+.my-sale-badge {
+  background: color-mix(in srgb, var(--global-palette-highlight) 80%, transparent);
+}
+
+/* 2) Нулиране на подравнявания от Blocks */
+.wc-block-components-product-sale-badge.alignright,
+.wc-block-components-product-sale-badge--align-right {
+  right: auto !important;
+  left: 10px !important;
+  transform: none !important;
+}
+
+.wc-block-components-product-sale-badge__text {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* 3) Wrapper да не оставя празно място */
+.my-sale-badge-wrapper {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: contents;
+  /* премахва собствената кутия на wrapper-а */
+}
+
+/* 4) Single Product – гарантираме overlay над галерията/лупата */
+.woocommerce div.product .woocommerce-product-gallery,
+.woocommerce div.product .woocommerce-product-gallery__image,
+.woocommerce div.product .woocommerce-product-gallery__trigger {
+  z-index: 1;
+}
+
+.woocommerce span.onsale {
+  z-index: 1001 !important;
+}
+@media (max-width: 600px) {
+
+  .my-sale-badge,
+  .woocommerce span.onsale,
+  .wc-block-components-product-sale-badge {
+    top: 8px !important;
+    left: 8px !important;
+    padding: 2px 5px !important;
+    font-size: 12px !important;
+   
+  }
+}
