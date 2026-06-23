@@ -3,7 +3,7 @@
  * Plugin Name: Dynamic Art Sale Badge
  * Description: Динамичен badge „Спести −XX%“ за WooCommerce (Shop + Single) и Woo Blocks (Featured/Product Grid) — без да показва цена.
  * Version: 1.2.0
- * Author: You
+ * Author: Ангел Коларов
  * License: GPLv2 or later
  */
 

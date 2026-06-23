@@ -3,7 +3,7 @@
  * Plugin Name: Dual Price (EUR) for WooCommerce
  * Description: Елегантен двоен показ на цени: BGN + EUR в скоби на същия ред. Поддържани: продукт/архив (вкл. намаление с del/ins), вариации, mini-cart (Kadence off-canvas), cart/checkout (classic), имейли.
  * Version: 1.5.0
- * Author: You
+ * Author: Ангел Коларов
  * License: GPLv2 or later
  */
 
